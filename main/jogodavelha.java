@@ -16,15 +16,31 @@ public class jogodavelha {
             int coluna = leitura.nextInt();
             System.out.println("Jogador " + jogadorAtual + ", escolha uma linha (1-3): ");
             int linha = leitura.nextInt();
+            if(coluna > 3 || linha > 3){
+                System.out.println("Posição inválida, escolha um número de 1 a 3");
+                continue;
+            }
             if(tabuleiro[linha-1][coluna-1] == ' '){
                 tabuleiro[linha-1][coluna-1] = jogadorAtual;
                 if(checarVitoria(jogadorAtual)) {
                     exibirTabuleiro();
-                    jogoAtivo = false;
+                    System.out.println("Deseja jogar novamente? Insira 1 para sim e 2 para não.");
+                    int playAgain = leitura.nextInt();
+                    if(playAgain == 2){
+                        jogoAtivo = false;
+                    }else{
+                        limparTabuleiro();
+                    }
                 }else if(checarEmpate()) {
                     exibirTabuleiro();
                     System.out.println("EMPATE!");
-                    jogoAtivo = false;
+                    System.out.println("Deseja jogar novamente? Insira 1 para sim e 2 para não.");
+                    int playAgain = leitura.nextInt();
+                    if(playAgain == 2){
+                        jogoAtivo = false;
+                    }else{
+                        limparTabuleiro();
+                    }
                 }else{
                     jogadorAtual = (jogadorAtual == 'X') ? 'O' : 'X';
                 }
@@ -41,6 +57,14 @@ public class jogodavelha {
                 System.out.print("|" + coluna);
             }
             System.out.println("|");
+        }
+    }
+
+    static void limparTabuleiro() {
+        for(int i = 0; i < 3; i++) {
+            for(int j = 0; j < 3; j++) {
+                tabuleiro[i][j] = ' ';
+            }
         }
     }
 
