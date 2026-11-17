@@ -1,4 +1,5 @@
-package main;
+package naila.isys.maratonajava.javacore;
+
 import java.util.Scanner;
 
 public class jogodavelha {
@@ -6,7 +7,7 @@ public class jogodavelha {
     static char[][] tabuleiro = {{' ',' ',' '}, {' ',' ',' '}, {' ',' ',' '} };
     public static void main(String[] args) {
         Scanner leitura = new Scanner(System.in);
-        
+
         char jogadorAtual = 'X';
         boolean jogoAtivo = true;
 
@@ -14,9 +15,13 @@ public class jogodavelha {
             exibirTabuleiro();
             System.out.println("Jogador "+ jogadorAtual +  ", escolha uma coluna (1-3): ");
             int coluna = leitura.nextInt();
+            if(coluna > 3){
+                System.out.println("Posição inválida, escolha um número de 1 a 3");
+                continue;
+            }
             System.out.println("Jogador " + jogadorAtual + ", escolha uma linha (1-3): ");
             int linha = leitura.nextInt();
-            if(coluna > 3 || linha > 3){
+            if(linha > 3){
                 System.out.println("Posição inválida, escolha um número de 1 a 3");
                 continue;
             }
@@ -84,6 +89,10 @@ public class jogodavelha {
         }
 
         if(tabuleiro[0][0]==jogador && tabuleiro[1][1] == jogador && tabuleiro[2][2] == jogador){
+            System.out.println("Jogador "+jogador+" venceu!");
+            return true;
+        }
+        if(tabuleiro[0][2]==jogador && tabuleiro[1][1] == jogador && tabuleiro[2][0] == jogador){
             System.out.println("Jogador "+jogador+" venceu!");
             return true;
         }
